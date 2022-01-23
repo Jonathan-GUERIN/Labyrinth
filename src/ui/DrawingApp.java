@@ -9,5 +9,7 @@ public class DrawingApp extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setVisible(true);
+		
+		//new QuitMenuItem(this);
 	}
 }
