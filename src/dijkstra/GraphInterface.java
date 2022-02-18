@@ -14,6 +14,9 @@ public interface GraphInterface {
 	public ArrayList<VertexInterface> getAllVertex(); // Il faut parcourir tout l'ensemble des sommet pour tester si successeur ou dans A
 	public ArrayList<VertexInterface> getSuccessors(VertexInterface r); // donne les successeurs de r
 	// Ensuite on teste si ces successeurs sont dans A ou pas
+	public VertexInterface[][] getBoxes();
+	public int getHeight();
+	public int getWidth();
 	
 	//Pour eviter la boucle
 	//public ArrayList<VertexInterface> notInA(); // Parcours allVertex et teste si le sommet est dans A avec A.has

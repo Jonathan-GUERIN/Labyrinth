@@ -211,4 +211,20 @@ public class Maze implements GraphInterface{
 		}
 		
 	}
+
+	@Override
+	public VertexInterface[][] getBoxes() {
+		return this.boxes;
+	}
+
+	@Override
+	public int getHeight() {
+		return this.height;
+	}
+
+	@Override
+	public int getWidth() {
+		return this.width;
+	}
+	
 }
