@@ -18,4 +18,12 @@ public class WindowPanel extends JPanel{
 		add(buttonsPanel,BorderLayout.SOUTH);
 	}
 	
+	public MazePanel getPanel() {
+		return this.mazePanel;
+	}
+	
+	public void notifyForUpdate() {
+		this.mazePanel.notifyForUpdate();
+		this.buttonsPanel.notifyForUpdate();
+	}
 }

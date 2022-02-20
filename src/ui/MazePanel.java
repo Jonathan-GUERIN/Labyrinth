@@ -32,31 +32,29 @@ public class MazePanel extends JPanel{
 			for(VertexInterface box : line) {
 				int i = box.getRef()[0];
 				int j = box.getRef()[1];
-				//box.printPos();
 				boxesPanel[i][j] = new BoxPanel(this.mazeApp,box);
-				System.out.print("i = "+i);
-				System.out.println(" j = "+j);
-				box.printPos();
 				add(boxesPanel[i][j]);
 			}
 		}
-		
-		
-		/*
-		for(int i=0;i < height;i++) {
-			for(int j = 0; j < width;j++) {
-				boxes[i][j].printPos();
-				boxesPanel[i][j] = new BoxPanel(this.mazeApp,boxes[i][j]);
-				boxes[i][j].printPos();
-				add(boxesPanel[i][j]);
-			}
-		}
-		*/
-		
-		
 		
 		//setBackground(Color.WHITE);
 		//setPreferredSize(new Dimension(256,256));
+
 	}
 	
+	public BoxPanel[][] getBoxesPanel(){
+		return this.boxesPanel;
+	}
+	
+	protected void paintComponent(Graphics g) {
+		//paints the background
+		super.paintComponent(g);
+		
+		//Ask the model to draw the segments
+		mazeApp.getModel().paintBoxes(g);
+	}
+	
+	public void notifyForUpdate() {
+		repaint();
+	}
 }
