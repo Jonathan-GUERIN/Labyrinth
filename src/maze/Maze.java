@@ -216,6 +216,19 @@ public class Maze implements GraphInterface{
 	public VertexInterface[][] getBoxes() {
 		return this.boxes;
 	}
+	
+	public void setBox(int i, int j, String label) {
+		if(label == "W") {
+			boxes[i][j] = new WBox(this,i,j);
+		}else if(label == "E") {
+			boxes[i][j] = new EBox(this,i,j);
+		}else if(label == "A") {
+			boxes[i][j] = new ABox(this,i,j);
+		}else if(label == "D") {
+			boxes[i][j] = new DBox(this,i,j);
+		}
+		
+	}
 
 	@Override
 	public int getHeight() {

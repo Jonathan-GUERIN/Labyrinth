@@ -17,6 +17,7 @@ public interface GraphInterface {
 	public VertexInterface[][] getBoxes();
 	public int getHeight();
 	public int getWidth();
+	public void setBox(int i, int j, String label);
 	
 	//Pour eviter la boucle
 	//public ArrayList<VertexInterface> notInA(); // Parcours allVertex et teste si le sommet est dans A avec A.has
