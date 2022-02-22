@@ -31,6 +31,7 @@ public class SelectedMode extends JPanel{
 	}
 	
 	public void notifyForUpdate() {
+		System.out.println("HERE");
 		repaint();
 	}
 	

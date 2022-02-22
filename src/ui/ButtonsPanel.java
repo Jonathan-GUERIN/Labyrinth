@@ -1,6 +1,9 @@
 package ui;
 
 import javax.swing.*;
+
+import model.*;
+
 import java.awt.event.*;
 import java.awt.*;
 
@@ -17,6 +20,8 @@ public final class ButtonsPanel extends JPanel{
 	public ButtonsPanel(MazeApp mazeApp) {
 		super();
 		
+		MazeAppModel mazeAppModel = mazeApp.getModel();
+		
 		setLayout(new GridLayout(1,7));
 		add(selectedMode = new SelectedMode(mazeApp));
 		add(modes = new Modes(mazeApp));
@@ -24,20 +29,20 @@ public final class ButtonsPanel extends JPanel{
 		add(erase = new Erase(mazeApp));
 		add(reset = new Reset(mazeApp));
 		add(solve = new Solve(mazeApp));
-		textHeight = new JTextField("Height");
+		textHeight = new JTextField("x");
 		add(textHeight);
 		textHeight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(textHeight.getText());
-				mazeApp.getModel().setHeight(Integer.parseInt(textHeight.getText()));
+				mazeAppModel.setHeight(Integer.parseInt(textHeight.getText()));
 			}
 		});
-		textWidth = new JTextField("Width");
+		textWidth = new JTextField("y");
 		add(textWidth);
 		textWidth.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(textWidth.getText());
-				mazeApp.getModel().setHeight(Integer.parseInt(textWidth.getText()));
+				mazeAppModel.setHeight(Integer.parseInt(textWidth.getText()));
 			}
 		});
 	}

@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class WindowPanel extends JPanel{
-	private final MazePanel mazePanel;
+	private MazePanel mazePanel;
 	private final ButtonsPanel buttonsPanel;
 	
 	public WindowPanel(MazeApp mazeApp) {
@@ -20,6 +20,9 @@ public class WindowPanel extends JPanel{
 	
 	public MazePanel getPanel() {
 		return this.mazePanel;
+	}
+	public void setMazePanel(MazePanel mazePanel) {
+		this.mazePanel = mazePanel;
 	}
 	
 	public void notifyForUpdate() {

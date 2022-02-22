@@ -8,7 +8,7 @@ import model.MazeAppModel;
 
 public class MazeApp extends JFrame implements ChangeListener{
 	private final MazeMenuBar mazeMenuBar;
-	private final WindowPanel windowPanel;
+	private WindowPanel windowPanel;
 	private MazeAppModel mazeAppModel;
 	
 	public MazeApp() {
@@ -37,6 +37,11 @@ public class MazeApp extends JFrame implements ChangeListener{
 		return this.mazeAppModel;
 	}
 	
+	public void setWindowPanel(WindowPanel windowPanel) {
+		this.windowPanel = windowPanel;
+		setContentPane(windowPanel);
+	}
+	
 	public final void setModel(MazeAppModel mazeAppModel) {
 		this.mazeAppModel = mazeAppModel;
 	}
@@ -44,9 +49,14 @@ public class MazeApp extends JFrame implements ChangeListener{
 	public final MazePanel getMazePanel() {
 		return this.windowPanel.getPanel();
 	}
+	
+	public final void setMazePanel(MazePanel mazePanel) {
+		this.windowPanel.setMazePanel(mazePanel);
+	}
 
 	@Override
 	public void stateChanged(ChangeEvent e) {
+		//System.out.println("here");
 		this.windowPanel.notifyForUpdate();
 	}
 

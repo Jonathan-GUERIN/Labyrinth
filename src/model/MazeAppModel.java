@@ -11,7 +11,7 @@ import maze.DBox;
 import maze.EBox;
 import maze.Maze;
 import maze.WBox;
-import ui.MazeApp;
+import ui.*;
 
 public final class MazeAppModel {
 	private GraphInterface maze;
@@ -21,6 +21,8 @@ public final class MazeAppModel {
 	private String selectedMode = "W";
 	private Color selectedColor;
 	private boolean modified = false ;
+	private VertexInterface arrival;
+	private VertexInterface departure;
 	private ArrayList<ChangeListener> listeners = new ArrayList<ChangeListener>() ;
 	
 	public MazeAppModel(MazeApp mazeApp) {
@@ -69,7 +71,9 @@ public final class MazeAppModel {
 	public void setHeight(int height) {
 		if(this.height != height) {
 			this.height = height;
+			//System.out.println("new height "+height);
 			this.modified = true;
+			this.changeBoxes();
 			this.stateChanges();
 		}
 	}
@@ -83,6 +87,7 @@ public final class MazeAppModel {
 		int width = boxes[0].length;
 		this.maze = new Maze(boxes,height,width);
 		modified = true;
+		this.changeBoxes();
 		stateChanges();
 	}
 	
@@ -99,17 +104,34 @@ public final class MazeAppModel {
 	public void setSelectedMode(String selectedMode) {
 		this.selectedMode = selectedMode;
 		modified = true;
-		this.stateChanges();
+		this.setSelectedColor();
+	}
+	
+	public final void changeBoxes() {
+		System.out.println("model.paintBoxes (paint) does nothing");
+		
+		System.out.println("new height "+this.height);
+		System.out.println("new width "+this.width);
+		
+		VertexInterface[][] newBoxes = new VertexInterface[height][width];
+		this.maze = new Maze(newBoxes,height,width);
+		for(int i=0;i < height;i++) {
+			for(int j = 0; j < width;j++) {
+				System.out.println("i "+i+" j "+j);
+				newBoxes[i][j] = new EBox(maze,i,j);
+			}
+		}
+		
+		this.changePanel();
+	}
+	
+	public void changePanel() {
+		//WindowPanel windowPanel = new WindowPanel(this.mazeApp);
+		this.mazeApp.getMazePanel().changeBoxesPanel();
 	}
 	
 	public final void paintBoxes(Graphics g) {
-		System.out.println("model.paintBoxes (paint) does nothing");
 		
-		for(int i=0; i < height ; i++) {
-			for(int j = 0; j < width ; j++) {
-				this.mazeApp.getMazePanel().getBoxesPanel()[i][j].paint();
-			}
-		}
 	}
 	
 	public final void chooseColorBox(int i , int j) {
@@ -132,7 +154,9 @@ public final class MazeAppModel {
 	
 	public void stateChanges() {
         ChangeEvent evt = new ChangeEvent(this) ;
+        //System.out.println("evt "+evt);
         for (ChangeListener listener : listeners) {
+        	System.out.println("listener "+listener);
         	listener.stateChanged(evt);
         }
     }
@@ -143,5 +167,9 @@ public final class MazeAppModel {
 
 	public boolean isModified() {
 		return modified;
+	}
+	
+	public void setBox(int i, int j) {
+		this.maze.setBox(i, j, selectedMode);
 	}
 }
