@@ -67,16 +67,19 @@ public class BoxPanel extends JButton implements ActionListener{
 	}
 	
 	public final void paint() {
+		System.out.println("nothing for now");
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		System.out.println("click");
 		this.mazeApp.getModel().setBox(i,j);
+		this.mazeApp.getModel().setSolved();
 	}
 	
 	public void notifyForUpdate() {
-		System.out.println("HERE");
+		//System.out.println("HERE");
 		repaint();
 	}
 }

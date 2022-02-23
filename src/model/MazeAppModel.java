@@ -4,7 +4,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.event.*;
 
+import dijkstra.Dijkstra;
 import dijkstra.GraphInterface;
+import dijkstra.PreviousInterface;
 import dijkstra.VertexInterface;
 import maze.ABox;
 import maze.DBox;
@@ -24,6 +26,8 @@ public final class MazeAppModel {
 	private VertexInterface arrival;
 	private VertexInterface departure;
 	private ArrayList<ChangeListener> listeners = new ArrayList<ChangeListener>() ;
+	private ArrayList<VertexInterface> path = new ArrayList<VertexInterface>();
+	private boolean solved = false;
 	
 	public MazeAppModel(MazeApp mazeApp) {
 		this.mazeApp = mazeApp;
@@ -35,6 +39,21 @@ public final class MazeAppModel {
 			}
 		}
 		this.setSelectedColor();
+	}
+	
+	public VertexInterface getArrival() {
+		return this.arrival;
+	}
+	public void setArrival(VertexInterface arrival) {
+		this.arrival = arrival;
+		this.stateChanges();
+	}
+	public VertexInterface getDeparture() {
+		return this.departure;
+	}
+	public void setDeparture(VertexInterface departure) {
+		this.departure = departure;
+		this.stateChanges();
 	}
 	
 	public void setSelectedColor() {
@@ -52,6 +71,10 @@ public final class MazeAppModel {
 	
 	public Color getSelectedColor() {
 		return this.selectedColor;
+	}
+	
+	public void setSolved() {
+		this.solved = false;
 	}
 	
 	public int getWidth() {
@@ -80,21 +103,6 @@ public final class MazeAppModel {
 	
 	public GraphInterface getMaze() {
 		return this.maze;
-	}
-	
-	public void setBoxes(VertexInterface[][] boxes) {
-		int height = boxes.length;
-		int width = boxes[0].length;
-		this.maze = new Maze(boxes,height,width);
-		modified = true;
-		this.changeBoxes();
-		stateChanges();
-	}
-	
-	public void setBox(int i, int j, String label) {
-		this.maze.setBox(i, j, label);
-		modified = true;
-		stateChanges();
 	}
 	
 	public String getSelectedMode() {
@@ -138,7 +146,12 @@ public final class MazeAppModel {
 		VertexInterface bboxes[][] = this.maze.getBoxes();
 		VertexInterface box = bboxes[i][j];
 		if(box instanceof EBox) {
-			this.mazeApp.getMazePanel().getBoxesPanel()[i][j].setColor(Color.GREEN);
+			//this.mazeApp.getMazePanel().getBoxesPanel()[i][j].setColor(Color.GREEN);
+			if((path.contains(this.maze.getBoxes()[i][j]))&&(solved == true)) {
+				this.mazeApp.getMazePanel().getBoxesPanel()[i][j].setColor(Color.BLUE);
+			}else {
+				this.mazeApp.getMazePanel().getBoxesPanel()[i][j].setColor(Color.GREEN);
+			}
 		}else if(box instanceof WBox) {
 			this.mazeApp.getMazePanel().getBoxesPanel()[i][j].setColor(Color.RED);
 		}else if(box instanceof DBox) {
@@ -171,5 +184,90 @@ public final class MazeAppModel {
 	
 	public void setBox(int i, int j) {
 		this.maze.setBox(i, j, selectedMode);
+		if(selectedMode=="A") {
+			if(arrival!=null) {
+				int x = arrival.getRef()[0];
+				int y = arrival.getRef()[1];
+				this.setBoxForce(x, y, "E");
+				this.arrival = this.maze.getBoxes()[i][j];
+			}else {
+				this.arrival = this.maze.getBoxes()[i][j];
+			}
+		}
+		if(selectedMode=="D") {
+			if(departure!=null) {
+				int x = departure.getRef()[0];
+				int y = departure.getRef()[1];
+				this.setBoxForce(x, y, "E");
+				this.departure = this.maze.getBoxes()[i][j];
+			}else {
+				this.departure = this.maze.getBoxes()[i][j];
+			}
+		}
+		modified = true;
+		stateChanges();
+	}
+	public void setBoxForce(int i, int j, String label) {
+		this.maze.setBox(i, j, label);
+	}
+	
+	public void reset() {
+		System.out.println("Full Reset");
+		for(int i=0;i < height;i++) {
+			for(int j = 0; j < width;j++) {
+				this.setBoxForce(i, j, "E");
+			}
+		}
+		
+		stateChanges();
+	}
+	
+	public void solve() {
+		System.out.println("Solving");
+		if((arrival==null)||(departure==null)) {
+			System.out.println("Put arrival and departure");
+		}else {
+			PreviousInterface previous = Dijkstra.dijkstra(maze, departure);
+			
+			VertexInterface currentCase = arrival;
+			path = new ArrayList<VertexInterface>();
+			while(currentCase!=null) {
+				currentCase.printPos();
+				if((currentCase.getLabel2()!="A")&&(currentCase.getLabel2()!="D")){
+					path.add(currentCase);
+				}
+				currentCase = previous.getDad(currentCase);
+				
+			}
+			for(VertexInterface[] line : this.maze.getBoxes()) {
+				for(VertexInterface box : line) {
+					if(path.contains(box)) {
+						System.out.print(". ");
+					} else {
+						System.out.print(box.getLabel2()+" ");
+					}
+				}
+				System.out.println();
+			}
+			stateChanges();
+			solved = true;
+		}
+	}
+	
+	public void test() {
+		System.out.println("test");
+		GraphInterface mazeLocal;
+		height = 6;
+		width = 4;
+		VertexInterface[][] boxes2 = new VertexInterface[height][width];
+		mazeLocal = new Maze(boxes2,height,width);
+		for(int i=0;i < height;i++) {
+			for(int j = 0; j < width;j++) {
+				boxes2[i][j] = new EBox(mazeLocal,i,j);
+			}
+		}
+		this.maze = mazeLocal;
+		//this.setSelectedColor();
+		stateChanges();
 	}
 }
