@@ -1,7 +1,13 @@
 package model;
 
 import java.awt.*;
+import java.io.File;
+
+import javax.swing.*;
 import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.event.*;
 
 import dijkstra.Dijkstra;
@@ -175,7 +181,39 @@ public final class MazeAppModel {
     }
 
 	public void saveToFile() {
-		System.out.println("model.saveToFile() does nothing");
+		System.out.println("model.saveToFile() does something");
+		// parent component of the dialog
+		JFrame parentFrame = new JFrame();
+		 
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setDialogTitle("Specify a file to save");   
+		 
+		int userSelection = fileChooser.showSaveDialog(parentFrame);
+		 
+		if (userSelection == JFileChooser.APPROVE_OPTION) {
+		    File fileToSave = fileChooser.getSelectedFile();
+		    System.out.println("Save as file: " + fileToSave.getAbsolutePath()+".txt");
+		    this.maze.saveToTextFile(fileToSave.getAbsolutePath()+".txt");
+		}
+		
+	}
+	
+	public void loadToFile() {
+		System.out.println("model.saveToFile() does something");
+		// parent component of the dialog
+		JFrame parentFrame = new JFrame();
+		 
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setDialogTitle("Specify a file to load");   
+		 
+		int userSelection = fileChooser.showSaveDialog(parentFrame);
+		 
+		if (userSelection == JFileChooser.APPROVE_OPTION) {
+		    File fileToSave = fileChooser.getSelectedFile();
+		    System.out.println("Load file: " + fileToSave.getAbsolutePath()+".txt");
+		    //this.maze.initFromTextFile(fileToSave.getAbsolutePath());
+		    //this.maze.load(fileToSave.getAbsolutePath()+".txt");
+		}
 	}
 
 	public boolean isModified() {
