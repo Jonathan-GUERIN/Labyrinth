@@ -18,7 +18,7 @@ public final class QuitMenuItem extends JMenuItem implements ActionListener{
 		MazeAppModel mazeAppModel = this.mazeApp.getModel();
 		System.out.println("quitting");
 		
-		if (mazeAppModel.isModified()) {
+		if ((mazeAppModel.isModified())&&(!(mazeAppModel.isSaved()))) {
 	         int response = JOptionPane.showInternalOptionDialog(this,
 	                                                             "Maze not saved. Save it ?",
 	                                                             "Quit application",

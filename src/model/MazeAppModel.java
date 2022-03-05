@@ -27,6 +27,11 @@ import maze.MazeReadingException;
 import maze.WBox;
 import ui.*;
 
+/*
+ * Constructeur du model, on crée d'abord un labyrinthe vide de taille par 
+ * défault 5x12 pleine de EBox
+ * On pourra aisément modifier le labyrinthe et sa taille par la suite
+ */
 public final class MazeAppModel {
 	private GraphInterface maze;
 	private MazeApp mazeApp;
@@ -98,6 +103,9 @@ public final class MazeAppModel {
 	public void setSolved() {
 		this.solved = false;
 	}
+	public void setModified(boolean bool) {
+		this.modified = bool;
+	}
 	
 	public int getWidth() {
 		return this.width;
@@ -136,34 +144,6 @@ public final class MazeAppModel {
 		modified = true;
 		this.setSelectedColor();
 	}
-	/*
-	public final void changeBoxes() {
-		System.out.println("model.paintBoxes (paint) does nothing");
-		
-		System.out.println("new height "+this.height);
-		System.out.println("new width "+this.width);
-		
-		VertexInterface[][] newBoxes = new VertexInterface[height][width];
-		this.maze = new Maze(newBoxes,height,width);
-		for(int i=0;i < height;i++) {
-			for(int j = 0; j < width;j++) {
-				System.out.println("i "+i+" j "+j);
-				newBoxes[i][j] = new EBox(maze,i,j);
-			}
-		}
-		
-		this.changePanel();
-	}
-	
-	public void changePanel() {
-		//WindowPanel windowPanel = new WindowPanel(this.mazeApp);
-		this.mazeApp.getMazePanel().changeBoxesPanel();
-	}
-	
-	public final void paintBoxes(Graphics g) {
-		
-	}
-	*/
 	
 	public final void chooseColorBox(int i , int j) {
 		VertexInterface bboxes[][] = this.maze.getBoxes();
@@ -212,12 +192,15 @@ public final class MazeAppModel {
 		    System.out.println("Save as file: " + fileToSave.getAbsolutePath()+".txt");
 		    this.maze.saveToTextFile(fileToSave.getAbsolutePath()+".txt");
 		    setSaved(true);
+		    setModified(false);
 		}
 		
 	}
 	
 	public void loadToFile() {
 		// parent component of the dialog
+		setSaved(true);
+	    setModified(false);
 		JFrame parentFrame = new JFrame();
 		 
 		JFileChooser fileChooser = new JFileChooser();
@@ -300,6 +283,9 @@ public final class MazeAppModel {
 	public boolean isModified() {
 		return modified;
 	}
+	public boolean isSaved() {
+		return saved;
+	}
 	
 	public void setBox(int i, int j) {
 		this.maze.setBox(i, j, selectedMode);
@@ -349,6 +335,8 @@ public final class MazeAppModel {
 		System.out.println("Solving");
 		if((arrival==null)||(departure==null)) {
 			System.out.println("Put arrival and departure");
+			JFrame jFrame = new JFrame();
+			JOptionPane.showMessageDialog(jFrame, "Put arrival and departure");
 		}else {
 			PreviousInterface previous = Dijkstra.dijkstra(maze, departure);
 			
@@ -410,7 +398,9 @@ public final class MazeAppModel {
 		this.saved = boo;
 	}
 	
-	
+	/*
+	 *  searchDeparture cherche l'emplacement du départ et lance une erreur si rien n'est trouvé
+	 */
 	public int[] searchDeparture(VertexInterface[][] boxes,String fileName) throws MazeSolvingException {
 		//Find the arrival and departure in the new lab to set them
 		int[] coordD = new int[2];
@@ -433,6 +423,9 @@ public final class MazeAppModel {
 		}
 		return coordD;
 	}
+	/*
+	 *  searchArrival cherche l'emplacement de l'arrivée et lance une erreur si rien n'est trouvé
+	 */
 	public int[] searchArrival(VertexInterface[][] boxes,String fileName) throws MazeSolvingException {
 		//Find the arrival and departure in the new lab to set them
 		int[] coordA = new int[2];

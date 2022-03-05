@@ -17,19 +17,6 @@ public class BoxPanel extends JButton implements ActionListener{
 	private int j;
 	private final MazeApp mazeApp;
 	
-	private final static float[] dash = { 4.0f } ;
-	   
-	private final static BasicStroke usualStroke  ;
-	private final static BasicStroke largeStroke ;
-	private final static BasicStroke dashStroke  ;
-	   
-	static { // Static initialization of drawing modes
-	   usualStroke  = new BasicStroke() ;
-	   largeStroke  = new BasicStroke(3.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER) ;
-	   dashStroke   = new BasicStroke(1.0f, BasicStroke.CAP_ROUND,
-	                                  BasicStroke.JOIN_MITER, 10.0f, dash, 0.0f) ;	   
-	}
-	
 	public BoxPanel(MazeApp mazeApp, VertexInterface box) {
 		this.color = Color.WHITE;
 		this.mazeApp = mazeApp;
