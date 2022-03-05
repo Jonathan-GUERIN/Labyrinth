@@ -29,4 +29,15 @@ public class WindowPanel extends JPanel{
 		this.mazePanel.notifyForUpdate();
 		this.buttonsPanel.notifyForUpdate();
 	}
+	
+	/*
+	 * Completely remove the actual Panel for the maze and replace it by a new one.
+	 * The construction of the new one will use the informations of the model. 
+	 */
+	public void resize(MazeApp mazeApp) {
+		remove(this.mazePanel);
+		mazePanel = new MazePanel(mazeApp);
+		add(mazePanel,BorderLayout.CENTER);
+		//repaint();
+	}
 }

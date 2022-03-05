@@ -14,7 +14,7 @@ public class Draw extends JButton implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.mazeApp.getModel().test();
+		this.mazeApp.getModel().test(6,4);
 	}
 	
 }

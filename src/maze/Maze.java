@@ -9,7 +9,7 @@ import dijkstra.VertexInterface;
 public class Maze implements GraphInterface{
 	private int height;
 	private int width;
-	private VertexInterface[][] boxes = new VertexInterface[this.height][this.width];
+	private VertexInterface[][] boxes;
 	
 	public Maze(VertexInterface[][] boxes, int height, int width) {
 		super();
@@ -113,26 +113,6 @@ public class Maze implements GraphInterface{
 		try {
 			reader = new FileReader(fileName);
 			br = new BufferedReader(reader);
-			/*
-			String line = null;
-        	while((line = br.readLine())!= null) {
-	            System.out.println(line);
-	        }
-	        */
-			/*
-			int box;
-			int cpt = 0;
-        	while((box = br.read())!= -1) {
-	            System.out.print(box);
-	            System.out.print("/");
-	            if(cpt==9) {
-	            	cpt = 0;
-	            	System.out.println();
-	            }
-	            cpt++;
-	        }
-	        */
-        	
 			
 			int i = 0;
 			String line = null;
@@ -226,6 +206,8 @@ public class Maze implements GraphInterface{
 			boxes[i][j] = new ABox(this,i,j);
 		}else if(label == "D") {
 			boxes[i][j] = new DBox(this,i,j);
+		}else {
+			System.out.println("Error of label in Maze.setBox");
 		}
 		
 	}

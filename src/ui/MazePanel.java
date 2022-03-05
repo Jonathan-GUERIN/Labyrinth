@@ -46,6 +46,7 @@ public class MazePanel extends JPanel{
 
 	}
 	
+	/*
 	public void changeBoxesPanel() {
 		this.height = this.mazeAppModel.getHeight();
 		this.width = this.mazeAppModel.getWidth();
@@ -66,6 +67,7 @@ public class MazePanel extends JPanel{
 			}
 		}
 	}
+	*/
 	
 	public BoxPanel[][] getBoxesPanel(){
 		return this.boxesPanel;

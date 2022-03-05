@@ -59,5 +59,10 @@ public class MazeApp extends JFrame implements ChangeListener{
 		//System.out.println("here");
 		this.windowPanel.notifyForUpdate();
 	}
+	
+	public void resize() {
+		this.windowPanel.resize(this);
+		this.revalidate();
+	}
 
 }
