@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"java_project","l":"dijkstra"},{"m":"java_project","l":"maze"},{"m":"java_project","l":"model"},{"m":"java_project","l":"tp04_3"}];updateSearchResults();
