@@ -1,16 +1,17 @@
 package model;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
 import dijkstra.VertexInterface;
-import maze.*;
 import ui.MazeApp;
 
 public class BoxPanel extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Color color;
 	private VertexInterface box;
 	private int i;
@@ -29,7 +30,7 @@ public class BoxPanel extends JPanel{
 	public BoxPanel(MazeApp mazeApp, VertexInterface box) {
 		this.color = Color.WHITE;
 		this.mazeApp = mazeApp;
-		this.box = box;
+		this.setBox(box);
 		this.i = box.getRef()[0];
 		this.j = box.getRef()[1];
 		boxPanelMouseListener = new BoxPanelMouseListener(mazeApp,this.i,this.j);
@@ -102,5 +103,13 @@ public class BoxPanel extends JPanel{
 	 */
 	public void notifyForUpdate() {
 		repaint();
+	}
+
+	public VertexInterface getBox() {
+		return box;
+	}
+
+	public void setBox(VertexInterface box) {
+		this.box = box;
 	}
 }

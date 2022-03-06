@@ -17,7 +17,7 @@ public abstract class MBox implements VertexInterface{
 		this.y = y;
 		this.ref[0] = x;
 		this.ref[1] = y;
-		this.maze = maze;
+		this.setMaze(maze);
 	}
 
 	@Override
@@ -52,5 +52,13 @@ public abstract class MBox implements VertexInterface{
 	}
 	public boolean getBoxHovered() {
 		return this.hover;
+	}
+
+	public GraphInterface getMaze() {
+		return maze;
+	}
+
+	public void setMaze(GraphInterface maze) {
+		this.maze = maze;
 	}
 }

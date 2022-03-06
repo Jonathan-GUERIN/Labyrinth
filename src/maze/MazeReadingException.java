@@ -1,6 +1,10 @@
 package maze;
 
 public class MazeReadingException extends Exception {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final String file;
 	private final int line;
 	private final String msg;

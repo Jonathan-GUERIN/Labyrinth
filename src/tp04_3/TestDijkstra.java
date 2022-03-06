@@ -70,6 +70,7 @@ public class TestDijkstra {
 				}
 			}
 		}
+		System.out.println(i_a+" "+j_a);
 		VertexInterface currentCase = arrival;
 		ArrayList<VertexInterface> path = new ArrayList<VertexInterface>();
 		while(currentCase!=null) {

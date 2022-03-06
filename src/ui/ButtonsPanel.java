@@ -4,10 +4,13 @@ import javax.swing.*;
 
 import model.*;
 
-import java.awt.event.*;
 import java.awt.*;
 
 public final class ButtonsPanel extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final SelectedMode selectedMode;
 	private final Modes modes;
 	private final Reset reset;
@@ -39,5 +42,17 @@ public final class ButtonsPanel extends JPanel{
 	
 	public void notifyForUpdate() {
 		this.selectedMode.notifyForUpdate();
+	}
+
+	public Modes getModes() {
+		return modes;
+	}
+
+	public Reset getReset() {
+		return reset;
+	}
+
+	public Solve getSolve() {
+		return solve;
 	}
 }

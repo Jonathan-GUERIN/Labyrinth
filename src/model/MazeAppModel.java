@@ -290,7 +290,6 @@ public final class MazeAppModel {
 				br = new BufferedReader(reader);
 				
 				String line = null;
-				String label = null;
 				int height = 1;
 				line = br.readLine();
 				int width = line.length();
