@@ -43,7 +43,10 @@ public class BoxPanelMouseListener extends MouseAdapter{
 		if(this.mazeApp.getModel().getClicked()) {
 			this.mazeApp.getModel().setBox(i,j);
 			this.mazeApp.getModel().setSolved();
+		}else {
+			
 		}
+		this.mazeApp.getModel().setBoxHovered(i,j, true);
 	}
 	@Override
 	public final void mouseMoved(MouseEvent e) {
@@ -55,8 +58,7 @@ public class BoxPanelMouseListener extends MouseAdapter{
 	
 	@Override
 	public final void mouseExited(MouseEvent e) {
-		//System.out.println("exited");
-		//this.mazeApp.getMazePanel().getBoxesPanel()[i][j].setIsHovered(false);
+		this.mazeApp.getModel().setBoxHovered(i,j, false);
 	}
 	
 }

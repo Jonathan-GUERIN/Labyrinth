@@ -10,6 +10,7 @@ public abstract class MBox implements VertexInterface{
 	//private int weight = 999999; //??
 	//private VertexInterface dad; //??
 	private GraphInterface maze;
+	private boolean hover = false;
 	
 	public MBox(int x, int y, GraphInterface maze) {
 		this.x = x;
@@ -44,5 +45,12 @@ public abstract class MBox implements VertexInterface{
 	
 	public void printPos() {
 		System.out.println(this.getLabel()+" x="+this.x+" "+"y="+this.y);
+	}
+	
+	public void setBoxHovered(boolean bool) {
+		this.hover = bool;
+	}
+	public boolean getBoxHovered() {
+		return this.hover;
 	}
 }

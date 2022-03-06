@@ -67,6 +67,7 @@ public final class MazeAppModel {
 		return this.clicked;
 	}
 	
+	
 	public VertexInterface getArrival() {
 		return this.arrival;
 	}
@@ -293,6 +294,11 @@ public final class MazeAppModel {
 	}
 	public boolean isSaved() {
 		return saved;
+	}
+	
+	public void setBoxHovered(int i, int j, boolean bool) {
+		this.maze.setBoxHovered(i, j, bool);
+		stateChanges();
 	}
 	
 	public void setBox(int i, int j) {

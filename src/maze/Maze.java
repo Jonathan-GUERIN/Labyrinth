@@ -222,4 +222,8 @@ public class Maze implements GraphInterface{
 		return this.width;
 	}
 	
+	public void setBoxHovered(int i, int j, boolean bool) {
+		boxes[i][j].setBoxHovered(bool);
+	}
+	
 }

@@ -28,6 +28,7 @@ public class SelectedMode extends JPanel{
 		g.setColor(this.mazeApp.getModel().getSelectedColor());
 		g.fillRoundRect(10, 10, w, h, 15,15);
 		
+		
 	}
 	
 	public void notifyForUpdate() {

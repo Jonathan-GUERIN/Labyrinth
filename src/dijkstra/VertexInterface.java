@@ -10,6 +10,8 @@ public interface VertexInterface {
 	public int[] getRef();
 	public void printLabel();
 	public String getLabel2();
+	public void setBoxHovered(boolean bool);
+	public boolean getBoxHovered();
 	//public ArrayList<Vertex> listSuccesors(); // Regarder tous les successeurs du sommet en utilisant GraphInterface
 	
 	// le premier while commencera par la condition des successeurs
