@@ -12,6 +12,10 @@ public final class SetHeight extends JPanel{
 	private JTextField textHeight;
 	private JLabel labelHeight;
 	
+	/*
+	 * JPanel contenant un label et un TextField qui permettent de transmettre au modèle
+	 * la hauteur souhaitée par l'utilisateur.
+	 */
 	public SetHeight(MazeApp mazeApp) {
 		super();
 		

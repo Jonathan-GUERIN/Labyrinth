@@ -13,7 +13,11 @@ public class DrawD extends JButton implements ActionListener{
 		this.mazeApp = mazeApp;
 		addActionListener(this);
 	}
-
+	
+	/*
+	 * Lorqu'on clique sur le boutton "D", le mode sélectionné est "D", celui qui permet 
+	 * de dessiner des DBox
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		this.mazeApp.getModel().setSelectedMode("D");

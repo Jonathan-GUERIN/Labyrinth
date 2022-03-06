@@ -18,6 +18,14 @@ public class BoxPanel extends JPanel{
 	private final MazeApp mazeApp;
 	private BoxPanelMouseListener boxPanelMouseListener;
 	
+	/*
+	 * constructeur du boxPanel, qui constitue une case graphique du labyrinthe,
+	 * on peut cliquer dessus car  il contient un BoxPanelMouseListener, qui détectera les actions
+	 * de la sourie pour actualiser le modèle et la fenetre graphique sera rafraichie une fois le
+	 * modele modifié.
+	 * Le BoxPanel est donc associé à une MBox du labyrinthe réel (modèle) et contient les coordonnées
+	 * i et j de cette MBox
+	 */
 	public BoxPanel(MazeApp mazeApp, VertexInterface box) {
 		this.color = Color.WHITE;
 		this.mazeApp = mazeApp;
@@ -34,6 +42,13 @@ public class BoxPanel extends JPanel{
 		//addActionListener(this);
 	}
 	
+	/*
+	 * A chaque fois que le modele est modifié, l'application sera notifiée, et ainsi toutes les 
+	 * cases graphiques BoxPanel seront notifiées et se rafraichiront.
+	 * On demande au modèle si la souris de l'utilisateur est actuellement au dessus de la BoxPanel
+	 * pour peindre la case différement, elle aura de gros contours blancs pour indiquer que la 
+	 * souris "is hovering" au dessus de cette BoxPanel
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -66,25 +81,26 @@ public class BoxPanel extends JPanel{
 		}
 	}
 	
+	/*
+	 * La boxPanel contient la couleur avec laquelle elle se repeindra en demandant cette couleur 
+	 * au modèle via la fontion paintComponent
+	 */
 	public void setColor(Color color) {
 		this.color = color;
 	}
 	
+	/*
+	 * Est appelée dès que le modèle est modifié et que l'application en est notifiée.
+	 */
 	public final void paint() {
 		System.out.println("nothing for now");
 	}
-	/*
-	//@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("click");
-		this.mazeApp.getModel().setBox(i,j);
-		this.mazeApp.getModel().setSolved();
-	}
-	*/
 	
+	/*
+	 * indique que le modèle a été modifiée lorqu'elle a été appelée plus haut dans la 
+	 * hiérarchie de l'application.
+	 */
 	public void notifyForUpdate() {
-		//System.out.println("HERE");
 		repaint();
 	}
 }

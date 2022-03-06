@@ -13,7 +13,11 @@ public class DrawW extends JButton implements ActionListener{
 		this.mazeApp = mazeApp;
 		addActionListener(this);
 	}
-
+	
+	/*
+	 * Lorqu'on clique sur le boutton "W", le mode sélectionné est "W", celui qui permet 
+	 * de dessiner des WBox
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		this.mazeApp.getModel().setSelectedMode("W");

@@ -12,7 +12,10 @@ public class Reset extends JButton implements ActionListener{
 		this.mazeApp = mazeApp;
 		addActionListener(this);
 	}
-
+	
+	/*
+	 * reset le labyrinthe
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

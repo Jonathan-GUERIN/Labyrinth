@@ -13,6 +13,10 @@ public class SelectedMode extends JPanel{
 		this.selectedMode = this.mazeApp.getModel().getSelectedMode();
 	}
 	
+	/*
+	 * est rafraichi à chaque modifications et indique le mode qui est actuellement sélectionnée
+	 * entre dessiner des WBox, EBox, ABox ou DBox.
+	 */
 	protected final void paintComponent(Graphics g) {
 		//paints the background
 		super.paintComponent(g);

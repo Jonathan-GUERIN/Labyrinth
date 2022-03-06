@@ -13,7 +13,11 @@ public class DrawA extends JButton implements ActionListener{
 		this.mazeApp = mazeApp;
 		addActionListener(this);
 	}
-
+	
+	/*
+	 * Lorqu'on clique sur le boutton "A", le mode sélectionné est "A", celui qui permet 
+	 * de dessiner des ABox
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		this.mazeApp.getModel().setSelectedMode("A");

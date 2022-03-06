@@ -12,7 +12,10 @@ public final class LoadItem extends JMenuItem implements ActionListener{
 		this.mazeApp = mazeApp;
 		addActionListener(this);
 	}
-
+	
+	/*
+	 * Boutton pour charger un labyrinthe
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		MazeAppModel mazeAppModel = this.mazeApp.getModel();

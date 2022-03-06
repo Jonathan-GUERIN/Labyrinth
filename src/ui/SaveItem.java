@@ -12,7 +12,10 @@ public final class SaveItem extends JMenuItem implements ActionListener{
 		this.mazeApp = mazeApp;
 		addActionListener(this);
 	}
-
+	
+	/*
+	 * Sauvegarde le labyrinthe actuel en appelant saveToFile() du modele
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		MazeAppModel mazeAppModel = this.mazeApp.getModel();

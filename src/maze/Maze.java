@@ -11,6 +11,9 @@ public class Maze implements GraphInterface{
 	private int width;
 	private VertexInterface[][] boxes;
 	
+	/*
+	 * contient les MBox du modèle du labyrinthe
+	 */
 	public Maze(VertexInterface[][] boxes, int height, int width) {
 		super();
 		this.boxes = boxes;
@@ -18,6 +21,9 @@ public class Maze implements GraphInterface{
 		this.width = width;
 	}
 	
+	/*
+	 * indique si deux cases sont liées (on peut passer d'une case à l'autre en un pas).
+	 */
 	@Override
 	public boolean links(VertexInterface r, VertexInterface y) {
 		int[] ref_r = r.getRef();
@@ -35,6 +41,9 @@ public class Maze implements GraphInterface{
 		}
 		return false;  // Il faut faire attention à ne pas sortir du graph > test indices
 	}
+	/*
+	 * teste si la case est contenue dans le labyrinthe (bonnes dimensions)
+	 */
 	private boolean testIfIsIn(VertexInterface r) {
 		int[] ref_r = r.getRef();
 		int x_r = ref_r[0];
@@ -46,6 +55,9 @@ public class Maze implements GraphInterface{
 		}
 	}
 	
+	/*
+	 * Affiche le labyrinthe pour les tests
+	 */
 	public void printMaze() {
 		for(VertexInterface[] line : this.boxes) {
 			for(VertexInterface box : line) {
@@ -55,6 +67,10 @@ public class Maze implements GraphInterface{
 		}
 	}
 	
+	/*
+	 * indique le poid de parcours entre deux cases, ici ce sera toujours 1, (1 pas 
+	 * pour parcourir entre 2 cases juxtaposées)
+	 */
 	@Override
 	public int getWeightLink(VertexInterface r, VertexInterface y) {
 		if(this.testIfIsIn(r)&&this.testIfIsIn(y)) {
@@ -62,7 +78,10 @@ public class Maze implements GraphInterface{
 		}
 		return 99999;
 	}
-
+	
+	/*
+	 * retourne toutes les MBox pour les parcourir
+	 */
 	@Override
 	public ArrayList<VertexInterface> getAllVertex() {
 		ArrayList<VertexInterface> all = new ArrayList<VertexInterface>();
@@ -75,7 +94,10 @@ public class Maze implements GraphInterface{
 		System.out.println();
 		return all;
 	}
-
+	
+	/*
+	 * renvoie les successeurs d'une case (les voisins accessibles)
+	 */
 	@Override
 	public ArrayList<VertexInterface> getSuccessors(VertexInterface r) {
 		ArrayList<VertexInterface> successors = new ArrayList<VertexInterface>();
@@ -107,6 +129,9 @@ public class Maze implements GraphInterface{
 		return successors;
 	}
 	
+	/*
+	 * pour charger le labyrinthe à partir d'un fichier texte
+	 */
 	public final void initFromTextFile(String fileName) throws MazeReadingException {
 		Reader reader = null;
 		BufferedReader br = null;
@@ -169,6 +194,9 @@ public class Maze implements GraphInterface{
 		}
 	}
 	
+	/*
+	 * pour sauvegarder le labyrinthe dans un fichier texte.
+	 */
 	public final void saveToTextFile(String fileName) {
 		PrintWriter pw = null;
 		try {

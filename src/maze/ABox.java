@@ -4,7 +4,10 @@ import dijkstra.GraphInterface;
 
 public class ABox extends MBox{
 	private final String label = "A";
-
+	
+	/*
+	 * Instance de la case d'arrivée
+	 */
 	public ABox(GraphInterface maze, int x, int y) {
 		super(x, y, maze);
 	}

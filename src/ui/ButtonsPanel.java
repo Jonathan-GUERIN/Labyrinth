@@ -15,6 +15,9 @@ public final class ButtonsPanel extends JPanel{
 	private SetHeight setHeight;
 	private SetWidth setWidth;
 	
+	/*
+	 * affiche les différents boutons de l'interface.
+	 */
 	public ButtonsPanel(MazeApp mazeApp) {
 		super();
 		

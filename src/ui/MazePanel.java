@@ -19,6 +19,12 @@ public class MazePanel extends JPanel{
 	private MazeAppModel mazeAppModel;
 	private GridLayout gridLayout;
 	
+	/*
+	 * Le MazePanel est le panel qui contiendra toutes les BoxPanel, c'est à dire 
+	 * toutes les cases graphiques du labyrinthe sur lesquelles on peut cliquer.
+	 * La MazePanel contient donc le labyrinthe entier et stocker les cases 
+	 * dans un tableau de tableau dont la taille est indiquée à l'initialisation par le modèle
+	 */
 	public MazePanel(MazeApp mazeApp) {
 		super();
 		
@@ -49,35 +55,8 @@ public class MazePanel extends JPanel{
 
 	}
 	
-	/*
-	public void changeBoxesPanel() {
-		this.height = this.mazeAppModel.getHeight();
-		this.width = this.mazeAppModel.getWidth();
-		System.out.println(height);
-		System.out.println(width);
-		this.gridLayout = new GridLayout(height,width);
-		setLayout(gridLayout);
-		
-		this.boxesPanel = new BoxPanel[height][width];
-		VertexInterface[][] boxes = this.mazeAppModel.getMaze().getBoxes();
-		
-		for(VertexInterface[] line : boxes) {
-			for(VertexInterface box : line) {
-				int i = box.getRef()[0];
-				int j = box.getRef()[1];
-				boxesPanel[i][j] = new BoxPanel(this.mazeApp,box);
-				add(boxesPanel[i][j]);
-			}
-		}
-	}
-	*/
-	
 	public BoxPanel[][] getBoxesPanel(){
 		return this.boxesPanel;
-	}
-	
-	public void setBoxesPanel(BoxPanel[][] boxesPanel) {
-		this.boxesPanel = boxesPanel;
 	}
 	
 	protected void paintComponent(Graphics g) {

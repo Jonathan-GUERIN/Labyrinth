@@ -13,7 +13,11 @@ public class DrawE extends JButton implements ActionListener{
 		this.mazeApp = mazeApp;
 		addActionListener(this);
 	}
-
+	
+	/*
+	 * Lorqu'on clique sur le boutton "E", le mode sélectionné est "E", celui qui permet 
+	 * de dessiner des EBox
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		this.mazeApp.getModel().setSelectedMode("E");

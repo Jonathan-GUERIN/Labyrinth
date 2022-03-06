@@ -10,7 +10,11 @@ import maze.Maze;
 import maze.MazeReadingException;
 
 public class TestDijkstra {
-
+	
+	/*
+	 * permet de tester la fonction de chargement et de sauvegarde d'un labyrinthe,
+	 * puis de résoudre le labyrinthe
+	 */
 	public static void main(String[] args) {
 		VertexInterface[][] boxes = new VertexInterface[5][12];
 		GraphInterface maze = new Maze(boxes,5,12);

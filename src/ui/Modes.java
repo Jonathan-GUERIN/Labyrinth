@@ -9,7 +9,9 @@ public final class Modes extends JPanel{
 	private final DrawD drawD;
 	private final DrawA drawA;
 
-	
+	/*
+	 * contient les modes à sélectionner
+	 */
 	public Modes(MazeApp mazeApp) {
 		super();
 		

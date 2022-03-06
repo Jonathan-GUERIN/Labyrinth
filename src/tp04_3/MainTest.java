@@ -6,7 +6,10 @@ import maze.Maze;
 import maze.MazeReadingException;
 
 public class MainTest {
-
+	
+	/*
+	 * permet de tester la sauvegarde d'un labyrinthe et son chargement
+	 */
 	public static void main(String[] args) {
 		
 		VertexInterface[][] boxes = new VertexInterface[10][10];

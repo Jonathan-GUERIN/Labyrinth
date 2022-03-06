@@ -28,9 +28,13 @@ import maze.WBox;
 import ui.*;
 
 /*
- * Constructeur du model, on crée d'abord un labyrinthe vide de taille par 
+ * Constructeur du model, on crée d'abord un labyrinthe vide (que des EBox) de taille par 
  * défault 5x12 pleine de EBox
- * On pourra aisément modifier le labyrinthe et sa taille par la suite
+ * On pourra aisément modifier le labyrinthe et sa taille par la suite en modifiant les
+ * attributs height et width.
+ * Le modèle contient une ref sur l'application, contient l'information du mode sélectionné,
+ * c-a-d si l'on veut dessiner des WBox, EBox, ABox ou DBox.
+ * On détecte aussi si le clic gauche est enfoncé, si le labyrinthe a été modifié ou sauvegardé.
  */
 public final class MazeAppModel {
 	private GraphInterface maze;
@@ -60,26 +64,45 @@ public final class MazeAppModel {
 		this.setSelectedColor();
 	}
 	
+	/*
+	 * Est appelée par BoxPanelMouseListener
+	 */
 	public void setClicked(boolean bool) {
 		this.clicked = bool;
 	}
+	/*
+	 * indique si le clique gauche est enfoncé.
+	 */
 	public boolean getClicked() {
 		return this.clicked;
 	}
 	
-	
+	/*
+	 * indique où se trouve l'arrivée du labyrinthe, si cet attribut est nul, une exception
+	 * du nom de "MazeSolvingException" sera levée lorsqu'on voudra résoudre le labyrinthe.
+	 */
 	public VertexInterface getArrival() {
 		return this.arrival;
 	}
+	/*
+	 * modifie l'emplacement du départ
+	 */
 	public void setArrival(VertexInterface arrival) {
 		this.arrival = arrival;
 		this.modified = true;
 		this.setSaved(false);
 		this.stateChanges();
 	}
+	/*
+	 * indique où se trouve le départ du labyrinthe, si cet attribut est nul, une exception
+	 * du nom de "MazeSolvingException" sera levée lorsqu'on voudra résoudre le labyrinthe.
+	 */
 	public VertexInterface getDeparture() {
 		return this.departure;
 	}
+	/*
+	 * modifie l'emplacement de l'arrivée
+	 */
 	public void setDeparture(VertexInterface departure) {
 		this.departure = departure;
 		this.modified = true;
@@ -87,6 +110,9 @@ public final class MazeAppModel {
 		this.stateChanges();
 	}
 	
+	/*
+	 * choisi la couleur avec laquelle sera peinte la BoxPanel en fonction du mode sélectionné.
+	 */
 	public void setSelectedColor() {
 		if(selectedMode == "W") {
 			this.selectedColor = Color.RED; 
@@ -105,17 +131,23 @@ public final class MazeAppModel {
 	}
 	
 	/*
-	 * Is call whenever the maze is modified, thus not solved yet, which means that the
-	 * user hasn't clicked on "solve" and the path from departure to arrival still hasn't been 
-	 * shown yet.
+	 * Est appelée dès que le labyrinthe est modifiée, et donc pas encore résolu, cela indique 
+	 * l'utilisateur n'a pas encore cliqué sur "solve" et que la solution n'a pas encore
+	 * été affichée.
 	 */
 	public void setSolved() {
 		this.solved = false;
 	}
+	/*
+	 * l'attribut modified est true dès que le labyrinthe est modifié.
+	 */
 	public void setModified(boolean bool) {
 		this.modified = bool;
 	}
 	
+	/*
+	 * retourne la largeur (en nombre de case) du labyrinthe (axe horizontal)
+	 */
 	public int getWidth() {
 		return this.width;
 	}
@@ -128,6 +160,9 @@ public final class MazeAppModel {
 		}
 	}
 	
+	/*
+	 * retourne la hauteur (en nombre de case) du labyrinthe (axe vertical)
+	 */
 	public int getHeight() {
 		return this.height;
 	}
@@ -140,20 +175,32 @@ public final class MazeAppModel {
 		}
 	}
 	
+	/*
+	 * appelée pour modifier le modele
+	 */
 	public GraphInterface getMaze() {
 		return this.maze;
 	}
 	
+	/*
+	 * modifie le mode sélectionné (WBox, EBox ...)
+	 */
 	public String getSelectedMode() {
 		return this.selectedMode;
 	}
-	
 	public void setSelectedMode(String selectedMode) {
 		this.selectedMode = selectedMode;
 		modified = true;
 		this.setSelectedColor();
 	}
 	
+	/*
+	 * Demande au modèle l'instance de la MBox testée, en fonction de sa classe, 
+	 * on indique la couleur avec laquelle la BoxPanel sera affichée dans un attribut de 
+	 * la BoxPanel.
+	 * Si solved est true et que la MBox est contenue dans le path, c'est à dire le chemin
+	 * de la solution, alors on l'affiche en bleue
+	 */
 	public final void chooseColorBox(int i , int j) {
 		VertexInterface bboxes[][] = this.maze.getBoxes();
 		VertexInterface box = bboxes[i][j];
@@ -177,6 +224,9 @@ public final class MazeAppModel {
 		this.listeners.add(listener) ;
 	}
 	
+	/*
+	 * appelée dès que le modèle est modifié
+	 */
 	public void stateChanges() {
         ChangeEvent evt = new ChangeEvent(this) ;
         //System.out.println("evt "+evt);
@@ -185,7 +235,10 @@ public final class MazeAppModel {
         	listener.stateChanged(evt);
         }
     }
-
+	
+	/*
+	 * Sauvegarde le labyrinthe actuel.
+	 */
 	public void saveToFile() {
 		System.out.println("model.saveToFile() does something");
 		// parent component of the dialog
@@ -206,6 +259,12 @@ public final class MazeAppModel {
 		
 	}
 	
+	/*
+	 * Charge un labyrinthe pré-existant dans un répertoire local.
+	 * Peut engendrer des exceptions s'il n'y a pas de départ ou d'arrivée,
+	 * s'il y a un problème de lecture ou une incohérence (largeur de labyrinthe variable 
+	 * selon les lignes par exemple).
+	 */
 	public void loadToFile() {
 		// parent component of the dialog
 		setSaved(true);
@@ -288,19 +347,33 @@ public final class MazeAppModel {
 		}
 		stateChanges();
 	}
-
+	
+	/*
+	 * indique si le modèle a été modifié
+	 */
 	public boolean isModified() {
 		return modified;
 	}
+	/*
+	 * indique si le modèle a été sauvegardé
+	 */
 	public boolean isSaved() {
 		return saved;
 	}
 	
+	/*
+	 * rafraichit la fenetre dès que la souris passe au dessus d'une case BoxPanel.
+	 */
 	public void setBoxHovered(int i, int j, boolean bool) {
 		this.maze.setBoxHovered(i, j, bool);
 		stateChanges();
 	}
 	
+	/*
+	 * En fonction du mode sélectionné, si on click ou on maintient le click appuyé
+	 * et on se déplace, alors on modifie la case correspondante du modèle en rechargeant
+	 * MBox avec la bonne instance.
+	 */
 	public void setBox(int i, int j) {
 		this.maze.setBox(i, j, selectedMode);
 		if(selectedMode=="A") {
@@ -327,12 +400,20 @@ public final class MazeAppModel {
 		setSaved(false);
 		stateChanges();
 	}
+	/*
+	 * Il n'y a qu'une seule arrivée et qu'un seul départ, on appelle cette fonction
+	 * pour modifier l'ancien départ ou l'ancienne arrivée en EBox losqu'on positionne un
+	 * nouveau départ ou une nouvelle arrivée.
+	 */
 	public void setBoxForce(int i, int j, String label) {
 		this.maze.setBox(i, j, label);
 		this.modified = true;
 		setSaved(false);
 	}
 	
+	/*
+	 * reset le labyrinthe
+	 */
 	public void reset() {
 		System.out.println("Full Reset");
 		for(int i=0;i < height;i++) {
@@ -345,6 +426,10 @@ public final class MazeAppModel {
 		stateChanges();
 	}
 	
+	/*
+	 * résoud le labyrinthe et n'affichera aucune solution s'il n'y en a pas,
+	 * pas d'erreur mais aucun chemin ne sera affiché.
+	 */
 	public void solve() {
 		System.out.println("Solving");
 		if((arrival==null)||(departure==null)) {
@@ -379,7 +464,15 @@ public final class MazeAppModel {
 		}
 	}
 	
-	public void test(int height, int width) {
+	/*
+	 * N'est pas une fonction test, mais permet de modifier la taille du labyrinthe
+	 * en fonction de ce qu'a indiqué l'utilisateur
+	 * En indiquant dans les champs setHeight et setWidth de l'interface graphique les
+	 * nouvelles dimensions, l'appuie sur Enter indique dans ces cases textes
+	 * appellent la fonction changeDimensions qui recrée un nouveau labyrinthe vide aux dimensions
+	 * appropriées. Ici on modifie uniquement le modèle.
+	 */
+	public void changeDimensions(int height, int width) {
 		System.out.println("test");
 		GraphInterface mazeLocal;
 		this.setHeight(height);
@@ -396,16 +489,21 @@ public final class MazeAppModel {
 		resize();
 	}
 	
+	/*
+	 * Une fois la taille dans le modèle modifiée, on appelle resize de l'application,
+	 * qui recrée un nouveau MazePanel (le panel contenant toutes les cases du labyrinthes)
+	 * aux dimensions appropriées et supprime le précédent
+	 */
 	public void resize() {
 		this.mazeApp.resize();
 	}
 	
 	public void prepareHeight(int height) {
-		test(height,width);
+		changeDimensions(height,width);
 	}
 	
 	public void prepareWidth(int width) {
-		test(height,width);
+		changeDimensions(height,width);
 	}
 	
 	public void setSaved(boolean boo) {

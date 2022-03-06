@@ -7,6 +7,10 @@ public class WindowPanel extends JPanel{
 	private MazePanel mazePanel;
 	private final ButtonsPanel buttonsPanel;
 	
+	/*
+	 * contient le MazePanel qui contient les BoxPanel (cases graphiques du labyrinthe),
+	 * et arrange la disposition des bouttons en bas
+	 */
 	public WindowPanel(MazeApp mazeApp) {
 		super();
 		
@@ -34,8 +38,10 @@ public class WindowPanel extends JPanel{
 	}
 	
 	/*
-	 * Completely remove the actual Panel for the maze and replace it by a new one.
-	 * The construction of the new one will use the informations of the model. 
+	 * Enlève le MazePanel actuel qui contenait le labyrinthe précédent,
+	 * et le remplace par un nouveau MazePanel qui a les bonnes dimensions demandées
+	 * par l'utilisateur. La construction du nouveau labyrinthe utilise les informations
+	 * fournies dans le modèle.
 	 */
 	public void resize(MazeApp mazeApp) {
 		remove(this.mazePanel);

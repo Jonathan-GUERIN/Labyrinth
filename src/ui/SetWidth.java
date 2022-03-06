@@ -12,6 +12,10 @@ public final class SetWidth extends JPanel{
 	private JTextField textWidth;
 	private JLabel labelWidth;
 	
+	/*
+	 * JPanel contenant un label et un TextField qui permettent de transmettre au modèle
+	 * la largeur souhaitée par l'utilisateur.
+	 */
 	public SetWidth(MazeApp mazeApp) {
 		super();
 		

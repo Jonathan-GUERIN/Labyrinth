@@ -11,6 +11,12 @@ public class MazeApp extends JFrame implements ChangeListener{
 	private WindowPanel windowPanel;
 	private MazeAppModel mazeAppModel;
 	
+	/*
+	 * On crée le modèle (vide au début),
+	 * le menu,
+	 * la fenetre qui contiendra les options, le MazePanel qui contiendra la labyrinthe,
+	 * et donc les BoxPanel (les cases du labyrinthes)
+	 */
 	public MazeApp() {
 		super("Maze Application");  // Window title
 		
@@ -33,6 +39,10 @@ public class MazeApp extends JFrame implements ChangeListener{
 		setVisible(true);
 	}
 	
+	/*
+	 * permet d'accéder au modèle pour appeler des fonctions du modèle pour modifier
+	 * l'interface graphique.
+	 */
 	public final MazeAppModel getModel() {
 		return this.mazeAppModel;
 	}

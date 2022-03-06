@@ -7,6 +7,9 @@ public class FileMenu extends JMenu{
 	private final LoadItem loadItem;
 	private final SaveItem saveItem;
 	
+	/*
+	 * Menu du haut qui indique les différentes options
+	 */
 	public FileMenu(MazeApp mazeApp) {
 		super("File");
 		quitMenuItem = new QuitMenuItem(mazeApp);

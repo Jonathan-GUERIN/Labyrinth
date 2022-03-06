@@ -12,7 +12,10 @@ public final class QuitMenuItem extends JMenuItem implements ActionListener{
 		this.mazeApp = mazeApp;
 		addActionListener(this);
 	}
-
+	
+	/*
+	 * Permet de quitter et demande de sauvegarder si ce n'est pas sauvegardé et modifié
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		MazeAppModel mazeAppModel = this.mazeApp.getModel();
