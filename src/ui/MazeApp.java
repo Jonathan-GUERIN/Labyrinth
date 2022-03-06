@@ -46,6 +46,10 @@ public class MazeApp extends JFrame implements ChangeListener{
 		this.mazeAppModel = mazeAppModel;
 	}
 	
+	/*
+	 * doit retourner le maze panel qui contient toutes les cases graphiques du labyrinthes
+	 * cela permettra de modifier les cases du tableau
+	 */
 	public final MazePanel getMazePanel() {
 		return this.windowPanel.getPanel();
 	}

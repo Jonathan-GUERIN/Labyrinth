@@ -18,6 +18,9 @@ public class WindowPanel extends JPanel{
 		add(buttonsPanel,BorderLayout.SOUTH);
 	}
 	
+	/*
+	 * permet de d'obtenir les cases du tableau graphique.
+	 */
 	public MazePanel getPanel() {
 		return this.mazePanel;
 	}

@@ -7,7 +7,9 @@ import javax.swing.*;
 import dijkstra.VertexInterface;
 import maze.EBox;
 import model.BoxPanel;
+import model.BoxPanelMouseListener;
 import model.MazeAppModel;
+import model.MazePanelMouseListener;
 
 public class MazePanel extends JPanel{
 	private final MazeApp mazeApp;
@@ -16,6 +18,7 @@ public class MazePanel extends JPanel{
 	private int width;
 	private MazeAppModel mazeAppModel;
 	private GridLayout gridLayout;
+	MazePanelMouseListener mazePanelMouseListener;
 	
 	public MazePanel(MazeApp mazeApp) {
 		super();
@@ -39,6 +42,10 @@ public class MazePanel extends JPanel{
 				add(boxesPanel[i][j]);
 			}
 		}
+		
+		mazePanelMouseListener = new MazePanelMouseListener(mazeApp);
+		addMouseListener(mazePanelMouseListener);
+		addMouseMotionListener(mazePanelMouseListener);
 		
 		//addAncestorListener(this);
 		//setBackground(Color.WHITE);

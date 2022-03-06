@@ -46,6 +46,7 @@ public final class MazeAppModel {
 	private ArrayList<VertexInterface> path = new ArrayList<VertexInterface>();
 	private boolean solved = false;
 	private boolean saved = false;
+	private boolean clicked = false;
 	
 	public MazeAppModel(MazeApp mazeApp) {
 		this.mazeApp = mazeApp;
@@ -57,6 +58,13 @@ public final class MazeAppModel {
 			}
 		}
 		this.setSelectedColor();
+	}
+	
+	public void setClicked(boolean bool) {
+		this.clicked = bool;
+	}
+	public boolean getClicked() {
+		return this.clicked;
 	}
 	
 	public VertexInterface getArrival() {
