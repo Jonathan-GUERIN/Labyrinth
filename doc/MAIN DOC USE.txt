@@ -1,0 +1,3 @@
+Pour lancer l'application, lancer MainIHM.java
+Choisissez votre mode et dessiner, charger et sauvegarder.
+Vous pouvez modifiez la taille du labyrinthe.
